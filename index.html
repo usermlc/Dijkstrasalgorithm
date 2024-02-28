@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алгоритм Дейкстри з візуалізацією</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+        h2 {
+            color: #333;
+        }
+        .btn-primary, .btn-secondary {
+            margin-right: 10px;
+            border: none;
+        }
+        .btn-primary {
+            background-color: #007bff;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        #chart_div, #result {
+            background-color: #f0f0f0;
+            border: none;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        label {
+            color: #666;
+            font-weight: 600;
+        }
+        .form-control, .btn {
+            border-radius: 4px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5" data-aos="fade-up" data-aos-duration="1000">
+    <h2>Алгоритм Дейкстри</h2>
+    <p>На цій сторінці реалізовано алгоритм Дейкстри для знаходження найкоротших шляхів від однієї вершини до всіх інших у зваженому графі без від'ємних ваг.</p>
+    <p><strong>Використані структури даних:</strong></p>
+    <ul>
+        <li><strong>Граф:</strong> представлений як об'єкт об'єктів для зберігання зв'язків між вершинами та вагами ребер.</li>
+        <li><strong>Черга з пріоритетом:</strong> для ефективного вибору наступної вершини для обробки.</li>
+    </ul>
+    <p><strong>Реалізація алгоритму:</strong> Алгоритм проходить через граф, використовуючи чергу з пріоритетом, щоб знайти найкоротший шлях від стартової вершини до кожної іншої вершини, оновлюючи відстані та попередників по мірі проходження.</p>
+    <!-- Інтерфейс користувача -->
+    <div class="form-group">
+        <label for="startNode">Стартова вершина:</label>
+        <input type="text" id="startNode" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="graphInput">Введіть граф (формат: start,end,weight):</label>
+        <textarea id="graphInput" class="form-control" rows="10"></textarea>
+    </div>
+    <!-- Кнопка для пошуку найкоротшого шляху -->
+    <button id="findShortestPath" class="btn btn-primary">Знайти найкоротший шлях</button>
+
+    <!-- Кнопка для завантаження графа з файлу -->
+    <button id="loadGraph" class="btn btn-secondary">Завантажити граф</button>
+    <input type="file" id="fileInput" style="display:none;">
+
+    <!-- Місце для візуалізації результату -->
+    <h3 class="mt-4">Результат:</h3>
+    <pre id="result"></pre>
+
+    <!-- Місце для візуалізації графа -->
+    <div id="chart_div"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<script src="dijkstra.js"></script>
+</body>
+</html>
